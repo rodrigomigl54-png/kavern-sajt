@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kavern – čišćenje i održavanje | Novi Sad</title>
+  <meta name="description" content="KAVERN – profesionalno pranje portala i izloga, dubinsko čišćenje nameštaja, garnitura, tepiha, pranje betonskih površina i generalno čišćenje. Novi Sad i okolina. Pozovite 069 200 6808.">
+  <meta name="theme-color" content="#0B2A6B">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Open Graph (za lepši prikaz linka na društvenim mrežama i Viber-u) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="sr_RS">
+  <meta property="og:site_name" content="KAVERN – čišćenje i održavanje">
+  <meta property="og:title" content="Kavern – čišćenje i održavanje | Novi Sad">
+  <meta property="og:description" content="Čistoća koja ostavlja dugotrajan utisak! Pranje portala i izloga, dubinsko čišćenje nameštaja, garnitura i tepiha. Novi Sad i okolina.">
+  <!-- Kada sajt dobije domen, ovde upišite punu adresu, npr. https://www.kavern.rs/images/portali-hero.jpg -->
+  <meta property="og:image" content="images/portali-hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Fontovi (Google Fonts, podrška za č, ć, š, ž, đ preko latin-ext) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Glavna slika se učitava odmah (hero) -->
+  <link rel="preload" as="image" href="images/portali-hero.jpg" fetchpriority="high">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!--
+    Odluka o intro animaciji se donosi pre iscrtavanja stranice (bez treperenja):
+    prikazuje se samo jednom po sesiji i nikad ako korisnik traži smanjeno kretanje.
+  -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      var seen = false;
+      try { seen = sessionStorage.getItem('kavern-intro-seen') === '1'; } catch (e) {}
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      d.classList.add(seen || reduce ? 'no-intro' : 'intro-active');
+    })();
+  </script>
+
+  <!-- Strukturirani podaci za Google (lokalni biznis) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "KAVERN – čišćenje i održavanje",
+    "description": "Profesionalno pranje portala i izloga, dubinsko čišćenje nameštaja, garnitura i tepiha, pranje betonskih površina i generalno čišćenje.",
+    "telephone": "+381692006808",
+    "email": "kavern.ciscenje@gmail.com",
+    "image": "images/portali-hero.jpg",
+    "priceRange": "RSD",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Novi Sad",
+      "addressCountry": "RS"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Novi Sad" },
+      { "@type": "Place", "name": "Novi Sad i okolina" }
+    ],
+    "slogan": "Čistoća koja ostavlja dugotrajan utisak!"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- =========================================================
+       IKONICE (linijski stil) – jedan SVG sprite za ceo sajt
+       ========================================================= -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <!-- Logo: kuća sa prozorčićima + talas + kap -->
+    <symbol id="logo-mark" viewBox="0 0 64 64">
+      <path d="M7 30.5 32 9l25 21.5" fill="none" stroke="var(--logo-house, #0B2A6B)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14.5 27v19.5h35V27" fill="none" stroke="var(--logo-house, #0B2A6B)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="24.5" y="25.5" width="15" height="14" rx="1.6" fill="var(--logo-accent, #1E6BFF)"/>
+      <path d="M32 25.5v14M24.5 32.5h15" stroke="var(--logo-window-cross, #fff)" stroke-width="2"/>
+      <path d="M3 53.5c7-5.5 15-5.5 22-1s15.5 4.5 23 0 10-4.6 13-3.4" fill="none" stroke="var(--logo-wave, #35B7FF)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M12 60c6-3 12-3 18-.6s12 2.4 18-.4" fill="none" stroke="var(--logo-accent, #1E6BFF)" stroke-width="2.6" stroke-linecap="round" opacity=".8"/>
+      <path d="M55 3.5s-6 7.2-6 11.4a6 6 0 0 0 12 0C61 10.7 55 3.5 55 3.5Z" fill="var(--logo-wave, #35B7FF)"/>
+      <path d="M52.6 14.8a2.6 2.6 0 0 0 2 2.7" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".9"/>
+    </symbol>
+
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.5h3.2l1.6 4.3-2.1 1.4a11.5 11.5 0 0 0 7.1 7.1l1.4-2.1 4.3 1.6V19a2 2 0 0 1-2.1 2A16.6 16.6 0 0 1 3 5.6a2 2 0 0 1 2-2.1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06a6.7 6.7 0 0 1-3.36-2.94c-.25-.44.25-.4.72-1.34.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.75 2.75 0 0 0-.86 2.04 4.8 4.8 0 0 0 1 2.53 10.9 10.9 0 0 0 4.2 3.7c1.56.68 2.18.73 2.96.62.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s-6 6.8-6 11a6 6 0 0 0 12 0c0-4.2-6-11-6-11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.3 14.5a2.8 2.8 0 0 0 2.4 2.7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.5 4.5M11 8.3v5.4M8.3 11h5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+
+    <!-- Usluge -->
+    <symbol id="i-window" viewBox="0 0 48 48"><rect x="8" y="6" width="32" height="36" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M24 6v36M8 24h32" stroke="currentColor" stroke-width="2.2"/><path d="m13 18 5-5m-3 9 9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/><path d="M5 42h38" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-sofa" viewBox="0 0 48 48"><path d="M11 22v-5a5 5 0 0 1 5-5h16a5 5 0 0 1 5 5v5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M7 21a4 4 0 0 1 4 4v3h26v-3a4 4 0 1 1 4 4v6H7v-6a4 4 0 0 1 0-8Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 37v4m28-4v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M38 6c0 0-2.5 2.9-2.5 4.6a2.5 2.5 0 0 0 5 0C40.5 8.9 38 6 38 6Z" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-armchair" viewBox="0 0 48 48"><path d="M14 23v-7a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 22a4 4 0 0 1 4 4v4h20v-4a4 4 0 1 1 4 4v7H10v-7a4 4 0 0 1 0-8Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M13 37v4m22-4v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="m40 9 1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1Z" fill="currentColor"/></symbol>
+    <symbol id="i-carpet" viewBox="0 0 48 48"><rect x="9" y="7" width="30" height="34" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="15" y="13" width="18" height="22" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m24 18 5 6-5 6-5-6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 41v3m6-3v3m6-3v3m6-3v3m6-3v3M12 4v3m6-3v3m6-3v3m6-3v3m6-3v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-concrete" viewBox="0 0 48 48"><path d="M10 9h12v6H10zM16 15v5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M16 20h4l6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 26l3 5m1-6 5 3m-6-6 6 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".7"/><path d="M4 42h40M8 36h12l-3 6M24 36h14l3 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 48 48"><path d="M22 8c1.3 7.2 3.8 9.7 11 11-7.2 1.3-9.7 3.8-11 11-1.3-7.2-3.8-9.7-11-11 7.2-1.3 9.7-3.8 11-11Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M36 28c.7 3.7 2 5 5.6 5.6-3.7.7-5 2-5.6 5.6-.7-3.7-2-5-5.6-5.6 3.7-.7 5-2 5.6-5.6ZM11 33c.5 2.4 1.3 3.3 3.6 3.6-2.4.5-3.2 1.3-3.6 3.6-.5-2.4-1.3-3.2-3.6-3.6 2.4-.5 3.2-1.3 3.6-3.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+
+    <!-- Prednosti -->
+    <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.2L4 17l3 3 5.3-5.2a4 4 0 0 0 5.2-5.3l-2.4 2.4-2.6-.6-.6-2.6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.8 14.2a4.5 4.5 0 0 1 5.2 4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.4 3 8 7 9.5 4-1.5 7-5.1 7-9.5V6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m8.8 12 2.2 2.2 4.3-4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10.5 21 19 10h-6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+
+    <!-- Majstorske usluge -->
+    <symbol id="i-pipe" viewBox="0 0 24 24"><path d="M4 8h7a3 3 0 0 1 3 3v9M4 5v6M14 20h5m-5-3h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 4s-2 2.4-2 3.7a2 2 0 0 0 4 0C21 6.4 19 4 19 4Z" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5m6-5v5M6.5 8h11v3a5.5 5.5 0 0 1-11 0Zm5.5 8.5V21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-frame" viewBox="0 0 24 24"><path d="M12 3 8 7.5h8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="4" y="7.5" width="16" height="12.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m6.5 17.5 4-4 3 3 2-2 2 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24"><path d="m13 7 4-4 4 4-4 4Zm2 2-11 11-2-2L13 7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <!-- =========================================================
+       INTRO – staklo, prskanje vode i brisanje „skidačem“
+       (crta se u <canvas>; HTML ovde služi kao početni sloj stakla)
+       ========================================================= -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <canvas class="intro__canvas" id="intro-canvas"></canvas>
+    <div class="intro__brand" id="intro-brand">
+      <svg class="intro__mark" viewBox="0 0 64 64"><use href="#logo-mark"/></svg>
+      <div class="intro__name">KAVERN</div>
+      <div class="intro__sub">čišćenje i održavanje</div>
+      <div class="intro__slogan">Čistoća koja se vidi!</div>
+    </div>
+    <button type="button" class="intro__skip" id="intro-skip">Preskoči <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+  </div>
+
+  <a class="skip-link" href="#main">Preskoči na sadržaj</a>
+
+  <!-- =========================================================
+       HEADER (sticky)
+       ========================================================= -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="logo" href="#pocetna" aria-label="KAVERN – čišćenje i održavanje, početna">
+        <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo-mark"/></svg>
+        <span class="logo__text">
+          <span class="logo__name">KAVERN</span>
+          <span class="logo__sub">čišćenje i održavanje</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Glavni meni">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#pocetna">Početna</a></li>
+          <li><a class="nav__link" href="#usluge">Usluge</a></li>
+          <li><a class="nav__link" href="#cenovnik">Cenovnik</a></li>
+          <li><a class="nav__link" href="#pre-posle">Pre/Posle</a></li>
+          <li><a class="nav__link" href="#galerija">Galerija</a></li>
+          <li><a class="nav__link" href="#o-nama">O nama</a></li>
+          <li data-handyman-nav><a class="nav__link" href="#majstorske-usluge">Majstorske usluge</a></li>
+          <li><a class="nav__link" href="#kontakt">Kontakt</a></li>
+        </ul>
+        <div class="nav__mobile-cta">
+          <a class="btn btn--primary btn--block" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite <span data-phone-text>069 200 6808</span></a>
+          <a class="btn btn--whatsapp btn--block" href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+        </div>
+      </nav>
+
+      <div class="header__actions">
+        <a class="btn btn--primary btn--sm header__call" href="tel:+381692006808" data-phone-link>
+          <svg aria-hidden="true"><use href="#i-phone"/></svg>
+          <span class="header__call-text">Pozovite <span data-phone-text>069 200 6808</span></span>
+          <span class="visually-hidden header__call-sr">Pozovite nas</span>
+        </a>
+        <a class="icon-btn icon-btn--whatsapp" href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener" aria-label="Pišite nam na WhatsApp">
+          <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>
+        </a>
+        <button class="icon-btn nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Otvori meni">
+          <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
+    <section class="hero" id="pocetna" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <img src="images/portali-hero.jpg" alt="" width="1200" height="1600" fetchpriority="high" decoding="async">
+      </div>
+      <div class="hero__glare" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="eyebrow reveal"><svg aria-hidden="true"><use href="#i-pin"/></svg> Novi Sad i okolina</p>
+          <h1 class="hero__title reveal" id="hero-title">Čistoća koja ostavlja <span class="text-blue">dugotrajan utisak!</span></h1>
+          <p class="hero__lead reveal">Profesionalno pranje portala, izloga i dubinsko čišćenje za poslovne i privatne prostore.</p>
+          <div class="hero__ctas reveal">
+            <a class="btn btn--primary btn--lg" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite <span data-phone-text>069 200 6808</span></a>
+            <a class="btn btn--whatsapp btn--lg" href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp <span data-phone-text>069 200 6808</span></a>
+          </div>
+          <a class="hero__secondary reveal" href="#kontakt">Zatražite procenu <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+
+        <ul class="trust glass reveal" aria-label="Zašto nam klijenti veruju">
+          <li><span class="trust__icon"><svg aria-hidden="true"><use href="#i-tools"/></svg></span> Profesionalna oprema</li>
+          <li><span class="trust__icon"><svg aria-hidden="true"><use href="#i-team"/></svg></span> Iskusni radnici</li>
+          <li><span class="trust__icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></span> Pouzdanost</li>
+          <li><span class="trust__icon"><svg aria-hidden="true"><use href="#i-bolt"/></svg></span> Brza usluga</li>
+        </ul>
+      </div>
+
+      <svg class="hero__wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 48c180-34 360-40 540-18s360 52 540 34 270-48 360-40v56H0Z" fill="#fff"/></svg>
+    </section>
+
+    <!-- =========================================================
+         USLUGE
+         ========================================================= -->
+    <section class="section" id="usluge" aria-labelledby="usluge-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker">Naše usluge</p>
+          <h2 class="section__title" id="usluge-title">Vaš prostor, naša briga!</h2>
+          <p class="section__lead">Od staklenih portala do omiljene garniture – svaku površinu čistimo pažljivo, profesionalnom opremom i sredstvima.</p>
+        </header>
+
+        <div class="services">
+          <article class="service-card reveal">
+            <span class="service-card__icon"><svg aria-hidden="true"><use href="#i-window"/></svg></span>
+            <h3 class="service-card__title">Pranje portala i izloga</h3>
+            <p>Kristalno čisti portali, izlozi i prozori – bez fleka i tragova, za lokale i domove.</p>
+            <div class="service-card__actions">
+              <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+              <a class="btn btn--ghost btn--sm" href="#kontakt" data-service="Pranje portala i izloga">Zatražite procenu</a>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-card__icon"><svg aria-hidden="true"><use href="#i-sofa"/></svg></span>
+            <h3 class="service-card__title">Dubinsko čišćenje nameštaja</h3>
+            <p>Specijalnom četkom izvlačimo prašinu, grinje i prljavštinu duboko iz tkanine.</p>
+            <div class="service-card__actions">
+              <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+              <a class="btn btn--ghost btn--sm" href="#kontakt" data-service="Dubinsko čišćenje nameštaja">Zatražite procenu</a>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-card__icon"><svg aria-hidden="true"><use href="#i-armchair"/></svg></span>
+            <h3 class="service-card__title">Čišćenje garnitura i fotelja</h3>
+            <p>Ugaone garniture, trosedi, dvosedi i fotelje ponovo izgledaju i mirišu kao nove.</p>
+            <div class="service-card__actions">
+              <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+              <a class="btn btn--ghost btn--sm" href="#kontakt" data-service="Čišćenje garnitura i fotelja">Zatražite procenu</a>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-card__icon"><svg aria-hidden="true"><use href="#i-carpet"/></svg></span>
+            <h3 class="service-card__title">Dubinsko čišćenje tepiha</h3>
+            <p>Uklanjamo fleke, mrlje i neprijatne mirise – tepih dobija svežinu i boju.</p>
+            <div class="service-card__actions">
+              <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+              <a class="btn btn--ghost btn--sm" href="#kontakt" data-service="Dubinsko čišćenje tepiha">Zatražite procenu</a>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-card__icon"><svg aria-hidden="true"><use href="#i-concrete"/></svg></span>
+            <h3 class="service-card__title">Pranje betonskih površina</h3>
+            <p>Dvorišta, staze, terase i parkinzi – mašinsko pranje koje vraća prvobitan izgled.</p>
+            <div class="service-card__actions">
+              <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+              <a class="btn btn--ghost btn--sm" href="#kontakt" data-service="Pranje betonskih površina">Zatražite procenu</a>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-card__icon"><svg aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+            <h3 class="service-card__title">Generalno čišćenje</h3>
+            <p>Temeljno čišćenje stanova, kuća i poslovnih prostora – od poda do plafona.</p>
+            <div class="service-card__actions">
+              <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+              <a class="btn btn--ghost btn--sm" href="#kontakt" data-service="Generalno čišćenje">Zatražite procenu</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Istaknuta kartica: pranje portala na visini -->
+        <article class="feature reveal">
+          <div class="feature__media shine">
+            <img src="images/restoran-dizalica.jpg" alt="Radnik KAVERN-a na makazastoj platformi pere staklenu fasadu restorana" width="1600" height="1200" loading="lazy" decoding="async">
+          </div>
+          <div class="feature__body">
+            <p class="kicker">Poslovni prostori</p>
+            <h3 class="feature__title">Pranje portala na visini</h3>
+            <p>Staklene fasade, visoki portali i izlozi restorana, lokala i poslovnih objekata. Radimo sa platforme, bezbedno i bez tragova – vaš objekat ponovo blista.</p>
+            <ul class="checklist">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Staklene fasade i visoki izlozi</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Ekološka sredstva, bez fleka</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Mogućnost redovnog održavanja</li>
+            </ul>
+            <div class="feature__actions">
+              <a class="btn btn--primary" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite za ponudu</a>
+              <a class="btn btn--ghost" href="#kontakt" data-service="Pranje portala i izloga">Zatražite procenu</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CENOVNIK (tabovi; cene se upisuju iz script.js → PRICES)
+         ========================================================= -->
+    <section class="section section--tint" id="cenovnik" aria-labelledby="cenovnik-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker">Cenovnik</p>
+          <h2 class="section__title" id="cenovnik-title">Jasne cene, bez iznenađenja</h2>
+          <p class="section__lead">Izaberite kategoriju. Sve cene su u dinarima.</p>
+        </header>
+
+        <div class="pricing reveal">
+          <div class="tabs" role="tablist" aria-label="Kategorije cenovnika">
+            <button class="tabs__tab" role="tab" id="tab-namestaj" aria-controls="panel-namestaj" aria-selected="true" type="button">
+              <svg aria-hidden="true"><use href="#i-sofa"/></svg> Čišćenje nameštaja
+            </button>
+            <button class="tabs__tab" role="tab" id="tab-portali" aria-controls="panel-portali" aria-selected="false" tabindex="-1" type="button">
+              <svg aria-hidden="true"><use href="#i-window"/></svg> Portali i prozori
+            </button>
+            <button class="tabs__tab" role="tab" id="tab-ostalo" aria-controls="panel-ostalo" aria-selected="false" tabindex="-1" type="button">
+              <svg aria-hidden="true"><use href="#i-sparkle"/></svg> Tepisi, betonske površine i generalno čišćenje
+            </button>
+            <span class="tabs__indicator" aria-hidden="true"></span>
+          </div>
+
+          <!-- Tab 1 – Čišćenje nameštaja -->
+          <div class="tabs__panel" role="tabpanel" id="panel-namestaj" aria-labelledby="tab-namestaj" tabindex="0">
+            <div class="price-card">
+              <div class="price-card__head">
+                <h3>Čišćenje nameštaja <span>(dubinsko pranje i čišćenje)</span></h3>
+              </div>
+              <ul class="price-list" id="price-list">
+                <!-- Popunjava script.js iz objekta PRICES -->
+              </ul>
+              <noscript><p class="note">Za prikaz cenovnika uključite JavaScript ili nas pozovite: 069 200 6808.</p></noscript>
+              <p class="note"><svg aria-hidden="true"><use href="#i-drop"/></svg> Konačna cena zavisi od veličine i stepena zaprljanosti. Pozovite ili pošaljite poruku za tačnu procenu.</p>
+              <div class="price-card__actions">
+                <a class="btn btn--primary" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite <span data-phone-text>069 200 6808</span></a>
+                <a class="btn btn--whatsapp" href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2 – Portali i prozori -->
+          <div class="tabs__panel" role="tabpanel" id="panel-portali" aria-labelledby="tab-portali" tabindex="0" hidden>
+            <div class="price-card price-card--portali">
+              <div class="portali-banner">
+                <svg aria-hidden="true"><use href="#i-window"/></svg>
+                <div>
+                  <h3>Kristalno čisti prozori? Sada je moguće!</h3>
+                  <p>Cena pranja portala i prozora isključivo po dogovoru.</p>
+                </div>
+              </div>
+              <div class="benefits">
+                <div class="benefit">
+                  <span class="benefit__icon"><svg aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+                  <h4>Besprekoran sjaj</h4>
+                  <p>Koristimo najsavremeniju opremu i ekološka sredstva za uklanjanje svake prljavštine, bez tragova.</p>
+                </div>
+                <div class="benefit">
+                  <span class="benefit__icon"><svg aria-hidden="true"><use href="#i-clock"/></svg></span>
+                  <h4>Uštedite vreme</h4>
+                  <p>Naš tim radi brzo, efikasno i bezbedno.</p>
+                </div>
+                <div class="benefit">
+                  <span class="benefit__icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
+                  <h4>Produžite vek trajanja</h4>
+                  <p>Redovnim čišćenjem štitite vaše staklene površine od oštećenja.</p>
+                </div>
+              </div>
+              <div class="price-card__actions price-card__actions--center">
+                <a class="btn btn--primary btn--lg" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite za ponudu</a>
+                <a class="btn btn--whatsapp btn--lg" href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3 – Tepisi, betonske površine i generalno čišćenje -->
+          <div class="tabs__panel" role="tabpanel" id="panel-ostalo" aria-labelledby="tab-ostalo" tabindex="0" hidden>
+            <div class="deal-grid">
+              <article class="deal">
+                <span class="deal__icon"><svg aria-hidden="true"><use href="#i-carpet"/></svg></span>
+                <h3>Dubinsko čišćenje tepiha</h3>
+                <p class="deal__price">Cena po dogovoru</p>
+                <div class="deal__actions">
+                  <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+                  <a class="btn btn--whatsapp btn--sm" href="https://wa.me/381692006808" data-wa-link data-wa-service="Dubinsko čišćenje tepiha" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+                </div>
+              </article>
+              <article class="deal">
+                <span class="deal__icon"><svg aria-hidden="true"><use href="#i-concrete"/></svg></span>
+                <h3>Pranje betonskih površina</h3>
+                <p class="deal__price">Cena po dogovoru</p>
+                <div class="deal__actions">
+                  <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+                  <a class="btn btn--whatsapp btn--sm" href="https://wa.me/381692006808" data-wa-link data-wa-service="Pranje betonskih površina" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+                </div>
+              </article>
+              <article class="deal">
+                <span class="deal__icon"><svg aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+                <h3>Generalno čišćenje</h3>
+                <p class="deal__price">Cena po dogovoru</p>
+                <div class="deal__actions">
+                  <a class="btn btn--primary btn--sm" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+                  <a class="btn btn--whatsapp btn--sm" href="https://wa.me/381692006808" data-wa-link data-wa-service="Generalno čišćenje" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PRE / POSLE – interaktivni slajderi
+         Svaka slika je već spojena (pre|posle), pa se iz iste slike
+         pomoću CSS-a prikazuju obe polovine.
+         ========================================================= -->
+    <section class="section" id="pre-posle" aria-labelledby="pre-posle-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker">Pre / Posle</p>
+          <h2 class="section__title" id="pre-posle-title">Razliku vidite odmah</h2>
+          <p class="section__lead">Povucite klizač levo-desno (prstom, mišem ili strelicama na tastaturi) i uporedite.</p>
+        </header>
+
+        <div class="ba-grid">
+          <!-- data-split: gde je spoj na slici (0–1); data-axis: x = levo|desno, y = gore|dole -->
+          <figure class="ba ba--tall reveal" data-src="images/kauc-prepost-1.jpg" data-w="1600" data-h="1600" data-axis="x" data-split="0.45"
+                  data-alt="Dubinsko čišćenje svetlosive ugaone garniture">
+            <div class="ba__frame"></div>
+            <figcaption>Svetlosiva ugaona garnitura</figcaption>
+          </figure>
+          <figure class="ba ba--tall reveal" data-src="images/kauc-prepost-2.jpg" data-w="1080" data-h="1080" data-axis="x" data-split="0.5"
+                  data-alt="Dubinsko čišćenje svetlosive garniture na parketu">
+            <div class="ba__frame"></div>
+            <figcaption>Garnitura na parketu</figcaption>
+          </figure>
+          <figure class="ba ba--wide reveal" data-src="images/kauc-prepost-3.jpg" data-w="401" data-h="401" data-axis="y" data-split="0.5" data-trim="0.006"
+                  data-alt="Dubinsko čišćenje crne ugaone garniture">
+            <div class="ba__frame"></div>
+            <figcaption>Crna ugaona garnitura</figcaption>
+          </figure>
+          <figure class="ba ba--wide reveal" data-src="images/kauc-prepost-4.jpg" data-w="864" data-h="1080" data-axis="y" data-split="0.5"
+                  data-alt="Dubinsko čišćenje braon-sive ugaone garniture">
+            <div class="ba__frame"></div>
+            <figcaption>Braon-siva ugaona garnitura</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         GALERIJA „Naši radovi“ + lightbox
+         ========================================================= -->
+    <section class="section section--tint" id="galerija" aria-labelledby="galerija-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker">Galerija</p>
+          <h2 class="section__title" id="galerija-title">Naši radovi</h2>
+          <p class="section__lead">Kliknite na fotografiju za uvećan prikaz.</p>
+        </header>
+
+        <ul class="gallery">
+          <li class="gallery__item reveal">
+            <button class="gallery__btn shine" type="button" data-index="0">
+              <img src="images/portali-hero.jpg" alt="Veliki crni klizni stakleni portali sale sa dvorištem" width="1200" height="1600" loading="lazy" decoding="async">
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"/></svg></span>
+            </button>
+            <p class="gallery__caption">Portali i izlozi</p>
+          </li>
+          <li class="gallery__item reveal">
+            <button class="gallery__btn shine" type="button" data-index="1">
+              <img src="images/portali-luk.jpg" alt="Drveni luk i čista staklena fasada sa kamenom stazom" width="1200" height="1600" loading="lazy" decoding="async">
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"/></svg></span>
+            </button>
+            <p class="gallery__caption">Portali i izlozi</p>
+          </li>
+          <li class="gallery__item reveal">
+            <button class="gallery__btn shine" type="button" data-index="2">
+              <img src="images/restoran-dizalica.jpg" alt="Pranje staklene fasade restorana sa makazaste platforme" width="1600" height="1200" loading="lazy" decoding="async">
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"/></svg></span>
+            </button>
+            <p class="gallery__caption">Pranje fasade i portala na visini</p>
+          </li>
+          <li class="gallery__item reveal">
+            <button class="gallery__btn shine" type="button" data-index="3">
+              <img src="images/kauc-prepost-1.jpg" alt="Dubinsko čišćenje ugaone garniture – pre i posle" width="1600" height="1600" loading="lazy" decoding="async">
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"/></svg></span>
+            </button>
+            <p class="gallery__caption">Sofa i garniture</p>
+          </li>
+          <li class="gallery__item reveal">
+            <button class="gallery__btn shine" type="button" data-index="4">
+              <img src="images/kauc-prepost-2.jpg" alt="Dubinsko čišćenje garniture na parketu – pre i posle" width="1080" height="1080" loading="lazy" decoding="async">
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"/></svg></span>
+            </button>
+            <p class="gallery__caption">Sofa i garniture</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         O NAMA + ZAŠTO BAŠ KAVERN
+         ========================================================= -->
+    <section class="section" id="o-nama" aria-labelledby="o-nama-title">
+      <div class="container about">
+        <div class="about__media reveal">
+          <div class="about__photo">
+            <!-- Na originalnoj slici desno je tekst; prikazujemo samo levi deo sa radnikom -->
+            <img src="images/o-nama-radnik.jpg" alt="Radnik KAVERN-a dubinski usisava staru garnituru u dvorištu" width="1537" height="1600" loading="lazy" decoding="async">
+          </div>
+          <div class="about__badge glass">
+            <svg aria-hidden="true"><use href="#logo-mark"/></svg>
+            <span><strong>Neka vaš prostor</strong> diše čistoćom!</span>
+          </div>
+        </div>
+
+        <div class="about__body">
+          <header class="reveal">
+            <p class="kicker">O nama</p>
+            <h2 class="section__title" id="o-nama-title">Vaše zdravlje je naš prioritet</h2>
+          </header>
+          <div class="about__text reveal">
+            <p>Vaše zdravlje i zdravlje vaše porodice su prioritet. Ugodniji život u vašem domu i više vremena za vaše najbliže obezbedićete ukoliko se posvetite najvećim komadima nameštaja unutar vaših prostorija.</p>
+            <p>Dubinsko čišćenje nije samo obično usisavanje – ono podrazumeva specijalnu četku koja izvlači svu nakupljenu prašinu, prljavštinu, grinje, odumrle ćelije kože itd. Standardnim usisavanjem ne mogu se u potpunosti ukloniti svi štetni uzročnici iz vašeg doma.</p>
+            <p>Posle prve profesionalne usluge rezultati su vidljivi odmah. <strong>Garantujemo kvalitet naših usluga i brzu efikasnost!</strong></p>
+          </div>
+
+          <div class="why reveal">
+            <h3 class="why__title">Zašto baš KAVERN?</h3>
+            <ul class="why__list">
+              <li><span class="why__check"><svg aria-hidden="true"><use href="#i-check"/></svg></span> Profesionalna oprema i sredstva</li>
+              <li><span class="why__check"><svg aria-hidden="true"><use href="#i-check"/></svg></span> Iskusni radnici</li>
+              <li><span class="why__check"><svg aria-hidden="true"><use href="#i-check"/></svg></span> Dolazak na adresu</li>
+              <li><span class="why__check"><svg aria-hidden="true"><use href="#i-check"/></svg></span> Brza procena i ponuda</li>
+              <li><span class="why__check"><svg aria-hidden="true"><use href="#i-check"/></svg></span> Mogućnost redovnog održavanja</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MAJSTORSKE USLUGE (uključuje se/isključuje u script.js:
+         const SHOW_HANDYMAN = true / false)
+         ========================================================= -->
+    <section class="section section--tint handyman" id="majstorske-usluge" aria-labelledby="majstor-title" hidden>
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker">Majstorske usluge</p>
+          <h2 class="section__title" id="majstor-title">Sitne popravke i montaža</h2>
+          <p class="section__lead">Pored čišćenja, rešavamo i vodoinstalaterske, elektro radove i montažu – brzo i uredno.</p>
+        </header>
+
+        <div class="handyman__tools reveal">
+          <label class="search" for="handyman-search">
+            <svg aria-hidden="true"><use href="#i-search"/></svg>
+            <span class="visually-hidden">Pretraga majstorskih usluga</span>
+            <input type="search" id="handyman-search" placeholder="Pretražite uslugu, npr. „bojler“ ili „televizor“" autocomplete="off">
+          </label>
+          <div class="chips" id="handyman-chips" role="group" aria-label="Filter po kategoriji"></div>
+        </div>
+
+        <div class="accordion" id="handyman-list">
+          <!-- Popunjava script.js iz objekta HANDYMAN_PRICES -->
+        </div>
+        <p class="handyman__empty" id="handyman-empty" hidden>Nema usluge koja odgovara pretrazi. Pozovite nas – verovatno možemo da pomognemo!</p>
+
+        <div class="handyman__cta reveal">
+          <p><svg aria-hidden="true"><use href="#i-hammer"/></svg> Za sve majstorske usluge pozovite za tačan dogovor.</p>
+          <div class="handyman__cta-btns">
+            <a class="btn btn--primary" href="tel:+381692006808" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg> Pozovite</a>
+            <a class="btn btn--whatsapp" href="https://wa.me/381692006808" data-wa-link data-wa-service="Majstorske usluge" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         KONTAKT I ZAHTEV ZA PROCENU
+         ========================================================= -->
+    <section class="contact" id="kontakt" aria-labelledby="kontakt-title">
+      <div class="contact__drops" aria-hidden="true"></div>
+      <div class="container contact__inner">
+        <div class="contact__info">
+          <p class="kicker kicker--light reveal">Kontakt</p>
+          <h2 class="contact__title reveal" id="kontakt-title">Treba vam čišćenje? <span>Dobijte brzu procenu.</span></h2>
+          <p class="contact__lead reveal">Pošaljite fotografiju prostora ili nameštaja i opis – javićemo vam se sa ponudom.</p>
+
+          <div class="contact__buttons reveal">
+            <a class="contact-btn" href="tel:+381692006808" data-phone-link>
+              <span class="contact-btn__icon"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
+              <span><small>Pozovite</small><strong data-phone-text>069 200 6808</strong></span>
+            </a>
+            <a class="contact-btn contact-btn--wa" href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener">
+              <span class="contact-btn__icon"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></span>
+              <span><small>WhatsApp</small><strong data-phone-text>069 200 6808</strong></span>
+            </a>
+            <a class="contact-btn" href="mailto:kavern.ciscenje@gmail.com" data-email-link>
+              <span class="contact-btn__icon"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>
+              <span><small>E-mail</small><strong data-email-text>kavern.ciscenje@gmail.com</strong></span>
+            </a>
+          </div>
+
+          <dl class="contact__meta reveal">
+            <div>
+              <dt><svg aria-hidden="true"><use href="#i-pin"/></svg> Područje rada</dt>
+              <dd data-area-text>Novi Sad i okolina</dd>
+            </div>
+            <div>
+              <dt><svg aria-hidden="true"><use href="#i-clock"/></svg> Radno vreme</dt>
+              <dd data-hours-text>Po dogovoru – pozovite nas</dd>
+            </div>
+          </dl>
+        </div>
+
+        <form class="quote glass-card reveal" id="quote-form" novalidate>
+          <h3 class="quote__title">Zahtev za procenu</h3>
+          <p class="quote__hint">Polja označena zvezdicom (*) su obavezna.</p>
+
+          <div class="field">
+            <label for="f-name">Ime i prezime *</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+            <p class="field__error" id="e-name" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="f-phone">Broj telefona *</label>
+            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06x xxx xxxx" required aria-describedby="e-phone">
+            <p class="field__error" id="e-phone" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="f-service">Usluga *</label>
+            <div class="select">
+              <select id="f-service" name="service" required aria-describedby="e-service">
+                <option value="">Izaberite uslugu…</option>
+                <!-- Opcije dodaje script.js -->
+              </select>
+              <svg aria-hidden="true"><use href="#i-chev-down"/></svg>
+            </div>
+            <p class="field__error" id="e-service" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="f-address">Adresa / naselje</label>
+            <input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="npr. Liman 3, Novi Sad">
+          </div>
+
+          <div class="field field--full">
+            <label for="f-message">Poruka / opis</label>
+            <textarea id="f-message" name="message" rows="4" placeholder="npr. „ugaona garnitura, svetla, par fleka“"></textarea>
+          </div>
+
+          <div class="quote__actions">
+            <button class="btn btn--whatsapp btn--block" type="submit" data-send="whatsapp"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> Pošalji na WhatsApp</button>
+            <button class="btn btn--primary btn--block" type="submit" data-send="email"><svg aria-hidden="true"><use href="#i-mail"/></svg> Pošalji mejlom</button>
+          </div>
+          <p class="quote__foot"><svg aria-hidden="true"><use href="#i-clock"/></svg> Odgovaramo brzo – obično u roku od nekoliko sati.</p>
+          <p class="quote__status" id="quote-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a class="logo logo--light" href="#pocetna" aria-label="KAVERN – na vrh stranice">
+          <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo-mark"/></svg>
+          <span class="logo__text">
+            <span class="logo__name">KAVERN</span>
+            <span class="logo__sub">čišćenje i održavanje</span>
+          </span>
+        </a>
+        <p class="footer__slogan">Čistoća • Kvalitet • Poverenje</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Brzi linkovi">
+        <h3>Brzi linkovi</h3>
+        <ul>
+          <li><a href="#usluge">Usluge</a></li>
+          <li><a href="#cenovnik">Cenovnik</a></li>
+          <li><a href="#pre-posle">Pre/Posle</a></li>
+          <li><a href="#galerija">Galerija</a></li>
+          <li><a href="#o-nama">O nama</a></li>
+          <li data-handyman-nav><a href="#majstorske-usluge">Majstorske usluge</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h3>Kontakt</h3>
+        <ul class="footer__contact">
+          <li><svg aria-hidden="true"><use href="#i-phone"/></svg> <a href="tel:+381692006808" data-phone-link data-phone-text>069 200 6808</a></li>
+          <li><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> <a href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><svg aria-hidden="true"><use href="#i-mail"/></svg> <a href="mailto:kavern.ciscenje@gmail.com" data-email-link data-email-text>kavern.ciscenje@gmail.com</a></li>
+          <li><svg aria-hidden="true"><use href="#i-pin"/></svg> <span data-area-text>Novi Sad i okolina</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>© <span id="year">2026</span> Kavern – čišćenje i održavanje. Sva prava zadržana.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Plutajuća dugmad (samo mobilni) -->
+  <div class="fab" aria-label="Brzi kontakt">
+    <a class="fab__btn fab__btn--wa" href="https://wa.me/381692006808" data-wa-link target="_blank" rel="noopener" aria-label="WhatsApp poruka"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></a>
+    <a class="fab__btn fab__btn--call" href="tel:+381692006808" data-phone-link aria-label="Pozovite 069 200 6808"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Uvećan prikaz fotografije" hidden>
+    <div class="lightbox__backdrop" data-lb-close></div>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" id="lightbox-img" src="" alt="">
+      <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__close" type="button" data-lb-close aria-label="Zatvori (Esc)"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <button class="lightbox__btn lightbox__prev" type="button" id="lb-prev" aria-label="Prethodna fotografija"><svg aria-hidden="true"><use href="#i-chev-left"/></svg></button>
+    <button class="lightbox__btn lightbox__next" type="button" id="lb-next" aria-label="Sledeća fotografija"><svg aria-hidden="true"><use href="#i-chev-right"/></svg></button>
+    <p class="lightbox__counter" id="lightbox-counter" aria-live="polite"></p>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
