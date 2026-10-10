@@ -36,7 +36,7 @@ Kada dobijete domen, u `index.html` upišite punu adresu slike u `og:image` (rad
 ## Izmene (sve na vrhu `script.js`)
 
 - **Telefon / WhatsApp / e-mail / radno vreme:** objekat `CONFIG`. Broj se menja na celom sajtu odjednom. (Broj je zbog Google-a upisan i u `index.html`, u bloku `application/ld+json`. Ako promenite broj, promenite ga i tamo.)
-- **Cene nameštaja:** objekat `PRICES`. Cena može biti broj (`1200`), raspon (`[200, 300]`) ili tekst (`'po dogovoru'`).
+- **Cene nameštaja:** objekat `PRICES`. Cena može biti broj (`1200`), raspon (`[200, 300]`), početna cena (`{ od: 4500 }` → „od 4.500 din“) ili tekst (`'po dogovoru'`).
 - **Cene majstorskih usluga:** objekat `HANDYMAN_PRICES` (kategorije i stavke).
 - **Uključi/isključi „Majstorske usluge“:** `const SHOW_HANDYMAN = true;` → `false` uklanja i sekciju i stavku u meniju.
 

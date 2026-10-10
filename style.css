@@ -1165,6 +1165,15 @@ html.intro-active .intro { display: block; animation: introFailsafe .4s ease 6s 
 .acc__inner { overflow: hidden; }
 .acc__inner .price-list { padding: 0 18px 12px; }
 .acc__inner .price-list li:last-child { border-bottom: 0; }
+.acc__note {
+  margin: 0 18px 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--sky);
+  color: var(--navy);
+  font-size: .88rem;
+  line-height: 1.55;
+}
 mark { background: rgba(53, 183, 255, .28); color: inherit; border-radius: 3px; padding: 0 1px; }
 
 .handyman__empty { text-align: center; color: var(--muted); margin: 18px 0 0; }

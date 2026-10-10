@@ -34,6 +34,7 @@ const CONFIG = {
    cena može biti:
      broj          → 1200        prikazuje se „1.200 din“
      [od, do]      → [200, 300]  prikazuje se „200–300 din“
+     { od: broj }  → { od: 4500 } prikazuje se „od 4.500 din“
      tekst         → 'po dogovoru'                                    */
 const PRICES = [
   { naziv: 'Jastuk',                          cena: [200, 300] },
@@ -70,8 +71,17 @@ const HANDYMAN_PRICES = [
       { naziv: 'Zamena grejača i čišćenje',       cena: 5000 },
       { naziv: 'Zamena sifona',                   cena: 2500 },
       { naziv: 'Instalacija veš-mašine',          cena: 2500 },
-      { naziv: 'Spajanje grejnih tela',           cena: 2500 }
-    ]
+      { naziv: 'Spajanje grejnih tela',           cena: 2500 },
+      { naziv: 'Mašinsko odgušenje kanalizacije (sajlom na elektro pogon)', cena: { od: 4500 } },
+      { naziv: 'Odgušenje vertikale',             cena: { od: 6500 } },
+      { naziv: 'Odgušenje WC šolje',              cena: { od: 2500 } },
+      { naziv: 'Odgušenje sudopere',              cena: { od: 3500 } },
+      { naziv: 'Odgušenje slivnika u podu',       cena: { od: 3500 } },
+      { naziv: 'Odgušenje umivaonika',            cena: { od: 2500 } },
+      { naziv: 'Odgušenje tuš kabine, kade',      cena: { od: 2500 } }
+    ],
+    // tekst ispod liste (može se obrisati ili izmeniti)
+    napomena: 'Prikazane cene vodoinstalaterskih usluga za odgušenje su informativnog karaktera. Tačna cena otpušavanja kanalizacije biće vam saopštena na licu mesta kada vodoinstalater utvrdi stepen zagušenja kao i mesto gde se formirao čep u kanalizaciji. Nakon završenog posla prostor gde se izvodi intervencija ostavljamo čistim i urednim. Garanciju dajemo na kvalitet pružene vodoinstalaterske usluge.'
   },
   {
     kategorija: 'Elektro radovi',
@@ -136,6 +146,7 @@ const HANDYMAN_PRICES = [
   function formatPrice(cena) {
     if (Array.isArray(cena)) return `${thousands(cena[0])}–${thousands(cena[1])} din`;
     if (typeof cena === 'number') return `${thousands(cena)} din`;
+    if (cena && typeof cena === 'object' && 'od' in cena) return `od ${thousands(cena.od)} din`;
     return String(cena);
   }
   const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -1020,6 +1031,7 @@ const HANDYMAN_PRICES = [
         <div class="acc__panel" id="acc-panel-${i}" role="region" aria-labelledby="acc-btn-${i}">
           <div class="acc__inner">
             <ul class="price-list">${g.stavke.map((s) => `<li data-name="${escapeHtml(s.naziv)}"><span class="price-list__name">${escapeHtml(s.naziv)}</span><span class="price-list__dots" aria-hidden="true"></span><span class="price-list__price">${escapeHtml(formatPrice(s.cena))}</span></li>`).join('')}</ul>
+            ${g.napomena ? `<p class="acc__note">${escapeHtml(g.napomena)}</p>` : ''}
           </div>
         </div>
       </div>`).join('');
